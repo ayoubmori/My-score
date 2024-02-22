@@ -89,9 +89,17 @@ available_away_teams = [team for team in teams['a_teams'] if team != h_team]
 a_team = st.sidebar.selectbox("Select Away Team", available_away_teams)
 
 
-# Team logos
-h_team_logo_path = display_logo(logo_league,h_team)
-a_team_logo_path = display_logo(logo_league,a_team)
+
+try:
+    if os.path.exists(h_team_logo_path):
+        # Team logos
+        h_team_logo_path = display_logo(logo_league,h_team)
+        a_team_logo_path = display_logo(logo_league,a_team)
+    else:
+        print(f"Error: Image file not found at {h_team_logo_path}")
+except Exception as e:
+    print(f"Error: Unable to open image file - {e}")
+    # Handle the error or log it as needed
 
 
 
